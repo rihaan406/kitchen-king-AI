@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: kitchen_kingai
+      POSTGRES_USER: kitchen
+      POSTGRES_PASSWORD: change_this_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - kitchen_pg:/var/lib/postgresql/data
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_MODEL: ${OPENROUTER_MODEL:-openai/gpt-oss-20b:free}
+      DATABASE_URL: postgresql://kitchen:change_this_password@postgres:5432/kitchen_kingai
+    depends_on:
+      - postgres
+volumes:
+  kitchen_pg:
