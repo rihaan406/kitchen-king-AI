@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-const API = "http://localhost:8000";
+const API = "https://chefkingdom.onrender.com";
 
 const starter = ["Eggs", "Potatoes", "Tomatoes", "Onion"];
 
