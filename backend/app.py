@@ -6,7 +6,17 @@ from pydantic import BaseModel, Field
 from openai import OpenAI
 
 app = FastAPI(title="Kitchen KingAI API", version="3.0.0")
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "https://kitchen-king-ai-3.onrender.com",
+        "https://kitchen-king-ai.web.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 API_KEY = os.getenv("OPENROUTER_API_KEY", "").strip()
 MODEL = os.getenv("OPENROUTER_MODEL", "openai/gpt-oss-20b:free")
